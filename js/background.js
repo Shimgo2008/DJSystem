@@ -85,7 +85,7 @@ function resize() {
 }
 
 async function main() {
-    const fragmentShaderSource = await fetch('/glsl/background.glsl').then(res => res.text());
+    const fragmentShaderSource = await fetch('../glsl/background.glsl').then(res => res.text());
 
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
