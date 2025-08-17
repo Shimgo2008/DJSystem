@@ -75,6 +75,12 @@
                 </div>
 
                 <div class="form-item">
+                    <label for="RoomID">Room ID</label>
+                    <input type="text" id="RoomID" placeholder="例: room123" required>
+                </div>
+
+
+                <div class="form-item">
                     <label for="eventName">イベント名</label>
                     <input type="text" id="eventName" placeholder="例: 夏祭り BGM" required>
                 </div>
@@ -92,4 +98,29 @@
     </div>
 </body>
 <script src="../js/background.js"></script>
+<script>
+    document.getElementById("editRoomForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const payload = new URLSearchParams({
+        roomID: document.getElementById("RoomID").value,
+        SpreadsheetURL: document.getElementById("sheetUrl").value,
+        title: document.getElementById("eventName").value,
+        description: document.getElementById("eventDescription").value
+    });
+
+    const res = await fetch("https://script.google.com/macros/s/AKfycbyBPLQa-PLDTlqQ3pIY0H1PCFZA1e2X5u6XCVLuhCbIQqvtThPSN_o1dX6JeJulEylvsQ/exec", {
+        method: "POST",
+        body: payload
+    });
+
+    const data = await res.json();
+    console.log(data);
+    if (data.status === "success") {
+        alert("ルームを作成しました！ URLをコピーしてください。\n" +
+            `${location.origin}/repo/room?roomID=${document.getElementById("RoomID").value}`);
+    } else {
+        alert("エラー: " + data.message || data.status);
+    }
+    });
+    </script>
 </html>
