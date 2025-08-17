@@ -13,51 +13,51 @@
         .result {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 2%; /* カード間のスペース */
+            gap: 2.5%; /* カード間のスペース */
             padding: 2%;
         }
 
-    /* 既存の music-card スタイルを少し調整 */
-    .music-card {
-    width: 100%; /* グリッド内で自動サイズ */
-    border-radius: 8%;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    background: #fff;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    font-family: system-ui, sans-serif;
-    }
+        /* 既存の music-card スタイルを少し調整 */
+        .music-card {
+            width: 100%; /* グリッド内で自動サイズ */
+            border-radius: 8%;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #fff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-family: system-ui, sans-serif;
+        }
 
-    .music-card:hover {
-    transform: translateY(-2%);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    }
+        .music-card:hover {
+            transform: translateY(-2%);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
 
-    .music-card img {
-    width: 100%;
-    display: block;
-    object-fit: cover;
-    }
+        .music-card img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
 
-    .card-body {
-    padding: 5%;
-    }
+        .card-body {
+            padding: 5%;
+        }
 
-    .card-body .title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0 0 2%;
-    color: #222;
-    }
+        .card-body .title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 2%;
+            color: #222;
+        }
 
-    .card-body .artist {
-    font-size: 0.85rem;
-    color: #666;
-    margin: 0;
-    }
+        .card-body .artist {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
 
-    /* Page Manager */
-    .page-manager {
+        /* Page Manager */
+        .page-manager {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -127,6 +127,9 @@
     </style>
 </head>
 <body>
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
     <canvas id="glslCanvas"></canvas>
     <div class="content-wrapper">
         <div class="content">

@@ -1,3 +1,19 @@
+// ページ読み込み完了時にスピナーを非表示に
+window.addEventListener("load", () => {
+  const loading = document.getElementById("loading");
+  
+  var startMsec = new Date();
+  while (new Date() - startMsec < 2000);
+
+  // スピナーをフェードアウト
+  loading.style.opacity = 0;
+
+  setTimeout(() => {
+    loading.style.display = "none";
+  }, 800);
+});
+
+
 const canvas = document.getElementById('glslCanvas');
 const gl = canvas.getContext('webgl');
 
