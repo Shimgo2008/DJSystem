@@ -4,15 +4,195 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DJSystem</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+
+    <style>
+        /* 🎵 Music Card */
+        .result {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2.5%; /* カード間のスペース */
+            padding: 2%;
+        }
+
+        /* 既存の music-card スタイルを少し調整 */
+        .music-card {
+            width: 100%; /* グリッド内で自動サイズ */
+            border-radius: 8%;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: #fff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-family: system-ui, sans-serif;
+        }
+
+        .music-card:hover {
+            transform: translateY(-2%);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .music-card img {
+            width: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 5%;
+        }
+
+        .card-body .title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 2%;
+            color: #222;
+        }
+
+        .card-body .artist {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+        }
+
+        /* Page Manager */
+        .page-manager {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3%;
+        margin: 5% 0;
+        font-family: system-ui, sans-serif;
+        }
+
+        .page-manager button {
+        background: #ff7f32;
+        color: #fff;
+        border: none;
+        border-radius: 6%;
+        padding: 2% 4%;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .page-manager button:hover {
+        background: #ff6a0d;
+        transform: translateY(-5%);
+        }
+
+        .page-manager button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+        }
+
+        .page-manager #currentPage {
+        font-size: 0.9rem;
+        color: #444;
+        padding: 1% 2%;
+        border-radius: 4%;
+        background: #f7f7f7;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* 🔍 Search */
+        .search {
+        display: flex;
+        justify-content: center;
+        margin: 5% 0;
+        }
+
+        .search input {
+        width: 80%; /* 画面幅の8割 */
+        padding: 2% 4%;
+        border: 2px solid #eee;
+        border-radius: 9999px;
+        font-size: 0.95rem;
+        font-family: system-ui, sans-serif;
+        outline: none;
+        transition: all 0.25s ease;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .search input:focus {
+        border-color: #ff7f32;
+        box-shadow: 0 0 0 4px rgba(255,127,50,0.15);
+        }
+
+    </style>
 </head>
 <body>
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
     <canvas id="glslCanvas"></canvas>
     <div class="content-wrapper">
         <div class="content">
+            <h2 id="eventTitle">イベントのタイトルを代入</h2>
+        </div>
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Search...">
+        </div>
+        <div class="result">
 
+            <!-- テンプレとしてこれをjsから生成 -->
+            <div class="music-card">
+                <img src="https://google.com/favicon.ico" alt="Album Cover">
+                    <div class="card-body">
+                        <h3 class="title">曲タイトル<br></h3>
+                        <p class="artist">アーティスト名</p>
+                    </div>
+            </div>
+            <div class="music-card">
+                <img src="https://google.com/favicon.ico" alt="Album Cover">
+                    <div class="card-body">
+                        <h3 class="title">曲タイトル</h3>
+                        <p class="artist">アーティスト名</p>
+                    </div>
+            </div>
+            <div class="music-card">
+                <img src="https://google.com/favicon.ico" alt="Album Cover">
+                    <div class="card-body">
+                        <h3 class="title">曲タイトル</h3>
+                        <p class="artist">アーティスト名</p>
+                    </div>
+            </div>
+
+            <div class="music-card">
+                <img src="https://google.com/favicon.ico" alt="Album Cover">
+                    <div class="card-body">
+                        <h3 class="title">曲タイトル<br></h3>
+                        <p class="artist">アーティスト名</p>
+                    </div>
+            </div>
+            <div class="music-card">
+                <img src="https://google.com/favicon.ico" alt="Album Cover">
+                    <div class="card-body">
+                        <h3 class="title">曲タイトル</h3>
+                        <p class="artist">アーティスト名</p>
+                    </div>
+            </div>
+            <div class="music-card">
+                <img src="https://google.com/favicon.ico" alt="Album Cover">
+                    <div class="card-body">
+                        <h3 class="title">曲タイトル</h3>
+                        <p class="artist">アーティスト名</p><br>
+                    </div>
+            </div>
+
+        </div>
+
+        <div class="page-manager">
+            <button id="prevPage">前のページ</button>
+            <span id="currentPage">current / max</span>
+            <button id="nextPage">次のページ</button>
         </div>
     </div>
 </body>
-<script src="/js/background.js"></script>
+<script src="../js/background.js"></script>
 </html>

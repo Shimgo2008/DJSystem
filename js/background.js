@@ -1,3 +1,19 @@
+// ページ読み込み完了時にスピナーを非表示に
+window.addEventListener("load", () => {
+  const loading = document.getElementById("loading");
+  
+  var startMsec = new Date();
+  while (new Date() - startMsec < 2000);
+
+  // スピナーをフェードアウト
+  loading.style.opacity = 0;
+
+  setTimeout(() => {
+    loading.style.display = "none";
+  }, 800);
+});
+
+
 const canvas = document.getElementById('glslCanvas');
 const gl = canvas.getContext('webgl');
 
@@ -69,7 +85,7 @@ function resize() {
 }
 
 async function main() {
-    const fragmentShaderSource = await fetch('/glsl/background.glsl').then(res => res.text());
+    const fragmentShaderSource = await fetch('../glsl/background.glsl').then(res => res.text());
 
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);

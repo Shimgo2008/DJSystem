@@ -4,15 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DJSystem</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <canvas id="glslCanvas"></canvas>
     <div class="content-wrapper">
         <div class="content">
+            <h2>Welcome to DJSystem!</h2>
+        </div>
 
+        <div class="join">
+            <h2>Join a Room</h2>
+            <form id="joinRoomForm">
+
+                <div class="join-item">
+                    <label for="roomId">Room ID</label>
+                    <input type="text" id="roomId" placeholder="ID" required>
+                </div>
+                <div class="join-item">
+                    <label for="password">パスワードを入力(任意)</label>
+                    <input type="text" id="password" placeholder="pass">
+                </div>
+                <br>
+                <button type="submit" id="joinRoomButton">Join Room</button>
+            </form>
+            <a href="../edit/" style="text-align: left; color: #ffe7e7; :visited{color: #ffe7e7;}">if you want to create a room...?</a>
+        </div>
+
+        <div class="about">
+            <h2>about me</h2>
+            <p>DJSystemとはSpotifyのプレイリストを複数人で編集できるようにするためのツールです</p>
+            <br>
+            <p style="text-align: center;">made by Shimgo2008 <a style="color: #ffe7e7; :visited{color: #ffe7e7;}" href="https://github.com/Shimgo2008/DJSystem/">GitHub</a></p>
         </div>
     </div>
 </body>
-<script src="/js/background.js"></script>
+<script src="../js/background.js"></script>
 </html>
