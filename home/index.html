@@ -86,7 +86,7 @@ if(code && state) {
     localStorage.setItem(STATE_KEY, state);
 
     // editor ページへ state をクエリに付与してリダイレクト
-    window.location.href = `/edit/?state=${encodeURIComponent(state)}`;
+    window.location.href = `../edit/?state=${encodeURIComponent(state)}`;
 }
 
 // "Create a room" リンクを OAuth に飛ばすように変更
