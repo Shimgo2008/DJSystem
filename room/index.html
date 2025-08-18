@@ -195,4 +195,52 @@
     </div>
 </body>
 <script src="../js/background.js"></script>
+<script>
+    // room.js
+
+// クエリパラメータをパース
+function getQueryParams() {
+    const params = {};
+    const queryString = window.location.search.substring(1);
+    const pairs = queryString.split("&");
+    for (const pair of pairs) {
+        if (pair === "") continue;
+        const [key, value] = pair.split("=");
+        params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+    }
+    console.log(params)
+    return params;
+}
+
+async function fetchRoomInfo(roomID) {
+    try {
+        const apiUrl = "https://script.google.com/macros/s/AKfycbyBPLQa-PLDTlqQ3pIY0H1PCFZA1e2X5u6XCVLuhCbIQqvtThPSN_o1dX6JeJulEylvsQ/exec"; // ←GASのデプロイURL
+        const res = await fetch(`${apiUrl}?roomID=${encodeURIComponent(roomID)}`);
+        const json = await res.json();
+
+        if (json.status === "success") {
+            const [id, title, description] = json.data;
+            document.getElementById("eventTitle").textContent = title;
+            // description をどこかに出すならここで追記
+            console.log("ルーム情報:", { id, title, description });
+        } else {
+            document.getElementById("eventTitle").textContent = "ルームが見つかりません";
+        }
+    } catch (err) {
+        console.error("API取得エラー:", err);
+        document.getElementById("eventTitle").textContent = "読み込みエラー";
+    }
+}
+
+// 初期化処理
+window.addEventListener("DOMContentLoaded", () => {
+    const params = getQueryParams();
+    if (params.roomID) {
+        fetchRoomInfo(params.roomID);
+    } else {
+        document.getElementById("eventTitle").textContent = "roomID が指定されていません";
+    }
+});
+
+</script>
 </html>
