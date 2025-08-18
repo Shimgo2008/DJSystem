@@ -49,7 +49,7 @@
 
 <script>
 const CLIENT_ID = '671c090ab41e48449f6df3145da6316b';
-const REDIRECT_URI = 'https://shimgo2008.github.io/DJSystem/home'; // このページの URL
+const REDIRECT_URI = 'https://script.google.com/macros/s/AKfycbyasCGqU5z8qWZbA3XItETYh9Ez-P23usJRGD-gXj3U-gmZbCk6jmzNwJzVbBou3pFcrw/exec'; // DJOAuth デプロイ先
 const SCOPES = 'playlist-read-private playlist-modify-private playlist-modify-public';
 const STATE_KEY = 'spotify_oauth_state';
 
@@ -76,19 +76,6 @@ function getSpotifyAuthURL() {
     return `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
-// Home ページに code & state がある場合は localStorage に保存して editor に飛ばす
-const urlParams = new URLSearchParams(window.location.search);
-const code = urlParams.get('code');
-const state = urlParams.get('state');
-
-if(code && state) {
-    localStorage.setItem('spotify_oauth_code', code);
-    localStorage.setItem(STATE_KEY, state);
-
-    // editor ページへ state をクエリに付与してリダイレクト
-    window.location.href = `../edit/?state=${encodeURIComponent(state)}`;
-}
-
 // "Create a room" リンクを OAuth に飛ばすように変更
 document.getElementById('createRoomLink').addEventListener('click', (e) => {
     e.preventDefault();
@@ -100,7 +87,6 @@ document.getElementById('joinRoomForm').addEventListener('submit', (e) => {
     e.preventDefault();
     const roomId = document.getElementById('roomId').value;
     const password = document.getElementById('password').value;
-    // 必要なら fetch などで参加処理
     alert(`Joining Room: ${roomId} (password: ${password})`);
 });
 </script>
